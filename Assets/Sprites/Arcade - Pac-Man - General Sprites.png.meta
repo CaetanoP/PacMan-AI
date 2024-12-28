@@ -115,7 +115,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 226.66667
+        width: 224
         height: 248
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -134,9 +134,9 @@ TextureImporter:
       name: Arcade - Pac-Man - General Sprites_1
       rect:
         serializedVersion: 2
-        x: 226
+        x: 228
         y: 0
-        width: 226.66667
+        width: 224
         height: 248
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
