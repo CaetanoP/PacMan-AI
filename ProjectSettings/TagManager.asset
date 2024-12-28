@@ -42,3 +42,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Map
+    uniqueID: 663204633
+    locked: 0
+  - name: Points
+    uniqueID: 3813281967
+    locked: 0
+  - name: Enemies
+    uniqueID: 3724755509
+    locked: 0
+  - name: Player
+    uniqueID: 1644027361
+    locked: 0
+  - name: HUD
+    uniqueID: 93207219
+    locked: 0
