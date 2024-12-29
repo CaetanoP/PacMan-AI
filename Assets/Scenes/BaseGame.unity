@@ -2186,7 +2186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1336594602
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2419,7 +2419,7 @@ GameObject:
   - component: {fileID: 1535428043}
   - component: {fileID: 1535428042}
   m_Layer: 0
-  m_Name: DotGen
+  m_Name: MapItens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2438,10 +2438,77 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pacDotPrefab: {fileID: 3677627474942238607, guid: 9f056c5f0b4f16a47ab6f51c54749cad, type: 3}
+  superPacDotPrefab: {fileID: 0}
+  nodePrefab: {fileID: 6672079491625469054, guid: bb19db98d15539546a62aa01d8dc4cd5, type: 3}
   wallParent: {fileID: 0}
   gridSize: {x: 26, y: 29}
   cellSize: 0.5
   offset: {x: 0, y: 0}
+  nodePositions:
+  - {x: 0, y: 0}
+  - {x: 11, y: 0}
+  - {x: 14, y: 0}
+  - {x: 25, y: 0}
+  - {x: 0, y: 3}
+  - {x: 2, y: 3}
+  - {x: 5, y: 3}
+  - {x: 8, y: 3}
+  - {x: 11, y: 3}
+  - {x: 14, y: 3}
+  - {x: 17, y: 3}
+  - {x: 20, y: 3}
+  - {x: 23, y: 3}
+  - {x: 25, y: 3}
+  - {x: 0, y: 6}
+  - {x: 2, y: 6}
+  - {x: 5, y: 6}
+  - {x: 8, y: 6}
+  - {x: 11, y: 6}
+  - {x: 14, y: 6}
+  - {x: 17, y: 6}
+  - {x: 20, y: 6}
+  - {x: 23, y: 6}
+  - {x: 25, y: 6}
+  - {x: 0, y: 9}
+  - {x: 5, y: 9}
+  - {x: 8, y: 9}
+  - {x: 11, y: 9}
+  - {x: 14, y: 9}
+  - {x: 17, y: 9}
+  - {x: 20, y: 9}
+  - {x: 25, y: 9}
+  - {x: 8, y: 12}
+  - {x: 17, y: 12}
+  - {x: 5, y: 15}
+  - {x: 8, y: 15}
+  - {x: 17, y: 15}
+  - {x: 20, y: 15}
+  - {x: 8, y: 18}
+  - {x: 11, y: 18}
+  - {x: 14, y: 18}
+  - {x: 17, y: 18}
+  - {x: 0, y: 21}
+  - {x: 5, y: 21}
+  - {x: 8, y: 21}
+  - {x: 11, y: 21}
+  - {x: 14, y: 21}
+  - {x: 17, y: 21}
+  - {x: 20, y: 21}
+  - {x: 25, y: 21}
+  - {x: 0, y: 24}
+  - {x: 5, y: 24}
+  - {x: 8, y: 24}
+  - {x: 11, y: 24}
+  - {x: 14, y: 24}
+  - {x: 17, y: 24}
+  - {x: 20, y: 24}
+  - {x: 25, y: 24}
+  - {x: 0, y: 28}
+  - {x: 5, y: 28}
+  - {x: 11, y: 28}
+  - {x: 14, y: 28}
+  - {x: 20, y: 28}
+  - {x: 25, y: 28}
 --- !u!4 &1535428043
 Transform:
   m_ObjectHideFlags: 0
@@ -3438,11 +3505,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 542834026797163312, guid: cbb244c1da2300747a7ce4e2bfe39498, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.75
+      value: -9.08
       objectReference: {fileID: 0}
     - target: {fileID: 542834026797163312, guid: cbb244c1da2300747a7ce4e2bfe39498, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.02
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 542834026797163312, guid: cbb244c1da2300747a7ce4e2bfe39498, type: 3}
       propertyPath: m_LocalPosition.z
