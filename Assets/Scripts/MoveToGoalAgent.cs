@@ -5,6 +5,7 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using System.Threading;
+using UnityEditor.Experimental.GraphView;
 public class MoveToGoalScript : Agent
 {
     [SerializeField] private SpriteRenderer renderInstance;
