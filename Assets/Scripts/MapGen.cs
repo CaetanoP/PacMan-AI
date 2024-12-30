@@ -15,7 +15,8 @@ public class MapGen : MonoBehaviour
     //Lista de vetores2
     public List<Vector2> cornerNodesPositions = new List<Vector2>();
     public List<Vector2> powerUpPositions = new List<Vector2>();
-    void Start()
+    public List<Vector2> pacDotCenterBlockedPositions = new List<Vector2>();
+    public void Awake()
     {
         SpawnMap();
     }
@@ -80,6 +81,11 @@ public class MapGen : MonoBehaviour
 
     private void SpawnPacDot(float y, float x, Vector3 position)
     {
+        //Verifica se é uma posição de Pac-Dot bloqueada
+        if (pacDotCenterBlockedPositions.Contains(new Vector2(x, y)))
+        {
+            return;
+        }
         //Instancia o Pac-Dot
         var instance_pac = Instantiate(pacDotPrefab, position, Quaternion.identity, GameObject.Find("PacDots").transform);
         instance_pac.name = $"Pac-Dot ({x}, {y})";
