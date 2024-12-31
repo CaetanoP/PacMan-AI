@@ -16,9 +16,6 @@ public class PacMan : Agent
 
     public override void OnEpisodeBegin()
     {
-
-
-
     }
     public void Start()
     {
@@ -27,7 +24,21 @@ public class PacMan : Agent
     public void Update()
     {
         // Move o personagem em direção ao nó atual
-        if (Vector2.Distance(transform.position, currentNode.transform.position) < 1f)
+        MoveToCurrentNode();
+        // Atualiza o nó apenas quando o personagem está no nó
+        if (IsNearNode())
+            UpdateCurrentNode();
+        // Atualiza a rotação do personagem com base na direção
+        UpdateRotation();
+    }
+
+    /// <summary>
+    /// Move o personagem em direção ao nó atual se não estiver muito longe,
+    /// caso contrário, o personagem é teletransportado para o nó atual.
+    /// </summary>
+    private void MoveToCurrentNode()
+    {
+        if (!IsFarFromNode())
         {
             transform.position = Vector3.MoveTowards(transform.position, currentNode.transform.position, speed * Time.deltaTime);
         }
@@ -35,51 +46,51 @@ public class PacMan : Agent
         {
             transform.position = currentNode.transform.position;
         }
-        // Verifica se estamos no centro do node atual
-        if (transform.position == currentNode.transform.position)
-        {
-            // Define os possíveis próximos nós com base nas direções
-            Dictionary<string, MyNode> directions = new Dictionary<string, MyNode>
-        {
-            { "up", currentNode.up },
-            { "down", currentNode.down },
-            { "left", currentNode.left },
-            { "right", currentNode.right }
-        };
+    }
 
-            // Tenta definir o próximo nó com base na direção atual
-            if (directions.TryGetValue(direction, out MyNode nextNode) && nextNode != null)
+    private bool IsFarFromNode()
+    {
+        return Vector2.Distance(transform.position, currentNode.transform.position) > 1f;
+    }
+    private bool IsNearNode()
+    {
+        return transform.position == currentNode.transform.position;
+    }
+
+    private void UpdateCurrentNode()
+    {
+        // Tenta obter o próximo nó com base na direção atual
+        MyNode nextNode = currentNode.GetNeighborByString(direction);
+
+        if (nextNode != null)
+        {
+            // Atualiza o nó e armazena a direção como a última usada
+            currentNode = nextNode;
+            previousDirection = direction;
+        }
+        else
+        {
+            // Se não há um nó na direção atual, tenta continuar na direção anterior
+            nextNode = currentNode.GetNeighborByString(previousDirection);
+            if (nextNode != null)
             {
                 currentNode = nextNode;
-                previousDirection = direction;
-            }
-            else
-            {
-
-                // Continua na direção anterior, se válida
-                if (directions.TryGetValue(previousDirection, out nextNode) && nextNode != null)
-                {
-                    currentNode = nextNode;
-                }
             }
         }
+    }
 
-        switch (previousDirection)
+    private void UpdateRotation()
+    {
+        float angle = previousDirection switch
         {
-            case "up":
-                transform.rotation = Quaternion.Euler(0, 0, 90);
-                break;
-            case "down":
-                transform.rotation = Quaternion.Euler(0, 0, -90);
-                break;
-            case "left":
-                transform.rotation = Quaternion.Euler(0, 0, 180);
-                break;
-            case "right":
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                break;
-        }
+            "up" => 90,
+            "down" => -90,
+            "left" => 180,
+            "right" => 0,
+            _ => 0
+        };
 
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
