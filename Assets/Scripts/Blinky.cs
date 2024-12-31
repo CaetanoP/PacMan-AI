@@ -55,12 +55,12 @@ public class Blinky : MonoBehaviour
             Debug.Log("Making a decision");
 
             //Normal behavior
-            if (currentNode.GetNeighborByString(direction) != null && currentNode.GetComponent<CornerNode>() == null)
+            if (currentNode.GetNeighborByString(direction) != null && currentNode.GetComponent<DecisionNode>() == null)
             {
                 direction = currentNode.GetDirectionByNode(currentNode.GetNeighborByString(direction));
                 currentNode = currentNode.GetNeighborByString(direction);
             }
-            else if(currentNode.GetNeighborByString(direction) == null && currentNode.GetComponent<CornerNode>() == null)
+            else if(currentNode.GetNeighborByString(direction) == null && currentNode.GetComponent<DecisionNode>() == null)
             {
                 //Take the direction that is not null and is not the reverse direction
                 MyNode[] neighbors = currentNode.GetComponent<MyNode>().neighbors;
@@ -90,7 +90,14 @@ public class Blinky : MonoBehaviour
         }
 
         // Move the character towards the next node
-        transform.position = Vector3.MoveTowards(transform.position, currentNode.transform.position, speed * Time.deltaTime);
+        if(Vector2.Distance(transform.position, currentNode.transform.position) < 1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, currentNode.transform.position, speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = currentNode.transform.position;
+        }
     }
 
     void Scatter()
@@ -100,12 +107,12 @@ public class Blinky : MonoBehaviour
     }
     void Chase()
     {
-        if (currentNode.GetComponent<CornerNode>() == null)
+        if (currentNode.GetComponent<DecisionNode>() == null)
         {
             return;
         }
         // Take all the neighbors of the current node
-        MyNode[] neighbors = currentNode.GetComponent<CornerNode>().neighbors;
+        MyNode[] neighbors = currentNode.GetComponent<DecisionNode>().neighbors;
 
         // Using Linq To get the next node closest to the target with priority
         var nextNode = neighbors

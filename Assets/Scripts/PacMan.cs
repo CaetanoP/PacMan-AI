@@ -27,8 +27,14 @@ public class PacMan : Agent
     public void Update()
     {
         // Move o personagem em direção ao nó atual
-        transform.position = Vector3.MoveTowards(transform.position, currentNode.transform.position, speed * Time.deltaTime);
-
+        if (Vector2.Distance(transform.position, currentNode.transform.position) < 1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, currentNode.transform.position, speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = currentNode.transform.position;
+        }
         // Verifica se estamos no centro do node atual
         if (transform.position == currentNode.transform.position)
         {
@@ -132,4 +138,14 @@ public class PacMan : Agent
 
 
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PacDot"))
+        {
+            AddReward(1f);
+            Destroy(collision.gameObject);
+        }
+    }
+
 }

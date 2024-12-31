@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class CornerNode : MyNode
+public sealed class PathNode : MyNode
 {
 
 }

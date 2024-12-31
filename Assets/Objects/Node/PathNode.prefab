@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6672079491625469054
+--- !u!1 &1548930731058648076
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6899643363493927190}
-  - component: {fileID: 3385805550831787808}
-  - component: {fileID: 6869361029786346752}
-  - component: {fileID: 3200695934429585413}
+  - component: {fileID: 8373252817293968208}
+  - component: {fileID: 1118601350387689544}
+  - component: {fileID: 4569761402471303710}
+  - component: {fileID: 4741604052705281752}
   m_Layer: 0
-  m_Name: CornerNode
+  m_Name: PathNode
   m_TagString: Node
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6899643363493927190
+--- !u!4 &8373252817293968208
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6672079491625469054}
+  m_GameObject: {fileID: 1548930731058648076}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -34,13 +34,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3385805550831787808
+--- !u!212 &1118601350387689544
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6672079491625469054}
+  m_GameObject: {fileID: 1548930731058648076}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,24 +75,24 @@ SpriteRenderer:
   m_SortingLayerID: 93207219
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
-  m_Color: {r: 0, g: 0.92096996, b: 1, a: 1}
+  m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
+  m_Color: {r: 0.9150943, g: 0.5740831, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 0.8828125}
+  m_Size: {x: 1, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &6869361029786346752
+--- !u!58 &4569761402471303710
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6672079491625469054}
+  m_GameObject: {fileID: 1548930731058648076}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -121,16 +121,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &3200695934429585413
+--- !u!114 &4741604052705281752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6672079491625469054}
+  m_GameObject: {fileID: 1548930731058648076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e1194fa1daeed8409d1890e2e461f79, type: 3}
+  m_Script: {fileID: 11500000, guid: c0894871c1851dc428f1f02078dbffb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   up: {fileID: 0}
@@ -138,5 +138,3 @@ MonoBehaviour:
   left: {fileID: 0}
   right: {fileID: 0}
   neighbors: []
-  closestPacMan: {fileID: 0}
-  pathCost: 1

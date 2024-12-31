@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MyNode : MonoBehaviour
+public abstract class MyNode : MonoBehaviour
 {
     [Header("Neighbors")]
     public MyNode up;
@@ -11,17 +11,13 @@ public class MyNode : MonoBehaviour
     public MyNode left;
     public MyNode right;
     public MyNode[] neighbors;
-    [Header("Pac")] public GameObject closestPacMan;
-    [Header("Costs")]
-    public float pathCost = 1;
-    public void Start()
+
+    public virtual void Start()
     {
         FindNeighborNodes();
-        FindPacman();
         neighbors = new MyNode[] { up, down, left, right };
     }
-
-    private void FindNeighborNodes()
+    protected virtual void FindNeighborNodes()
     {
         RaycastHit2D[] hitDown = Physics2D.RaycastAll(transform.position, Vector2.down, 0.5f);
         RaycastHit2D[] hitUp = Physics2D.RaycastAll(transform.position, Vector2.up, 0.5f);
@@ -56,18 +52,12 @@ public class MyNode : MonoBehaviour
             }
         }
     }
-    private void FindPacman()
-    {
-        closestPacMan = GameObject.Find("PacMan");
-    }
-
-    public float HeuristicCost(GameObject target)
+    public virtual float HeuristicCost(GameObject target)
     {
         return Vector2.Distance(transform.position, target.transform.position);
         //return Mathf.Abs(transform.position.x - target.transform.position.x) + Mathf.Abs(transform.position.y - target.transform.position.y);
     }
-
-    public MyNode GetNeighborByString(string direction)
+    public virtual MyNode GetNeighborByString(string direction)
     {
         switch (direction)
         {
@@ -83,7 +73,7 @@ public class MyNode : MonoBehaviour
                 return null;
         }
     }
-    public string GetDirectionByNode(MyNode targetNode)
+    public virtual string GetDirectionByNode(MyNode targetNode)
     {
         if (targetNode == up) return "up";
         if (targetNode == down) return "down";
@@ -92,7 +82,4 @@ public class MyNode : MonoBehaviour
 
         return null; // Caso não esteja conectado a esse nó
     }
-
-
-
 }
