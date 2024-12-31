@@ -12,6 +12,7 @@ public class PacMan : Agent
     public string previousDirection;
     public float speed = 8f;
     public MyNode currentNode;
+    public GameObject pacArrow;
 
     public override void OnEpisodeBegin()
     {
@@ -25,67 +26,53 @@ public class PacMan : Agent
     }
     public void Update()
     {
+        // Move o personagem em direção ao nó atual
+        transform.position = Vector3.MoveTowards(transform.position, currentNode.transform.position, speed * Time.deltaTime);
 
-            // Move o personagem em direção ao nó atual
-    transform.position = Vector3.MoveTowards(transform.position, currentNode.transform.position, speed * Time.deltaTime);
+        // Verifica se estamos no centro do node atual
+        if (transform.position == currentNode.transform.position)
+        {
+            // Define os possíveis próximos nós com base nas direções
+            Dictionary<string, MyNode> directions = new Dictionary<string, MyNode>
+        {
+            { "up", currentNode.up },
+            { "down", currentNode.down },
+            { "left", currentNode.left },
+            { "right", currentNode.right }
+        };
 
-    // Verifica se estamos no centro do node atual
-    if (transform.position.x == currentNode.transform.position.x && transform.position.y == currentNode.transform.position.y)
-    {
-        Debug.Log("Node atual: " + currentNode.name);
-
-        // Define o próximo node com base na direção
-        MyNode nextNode = null;
-
-        if (currentNode.up != null && direction == "up")
-        {
-            nextNode = currentNode.up;
-            previousDirection = "up";
-        }
-        else if (currentNode.down != null && direction == "down")
-        {
-            nextNode = currentNode.down;
-            previousDirection = "down";
-        }
-        else if (currentNode.left != null && direction == "left")
-        {
-            nextNode = currentNode.left;
-            previousDirection = "left";
-        }
-        else if (currentNode.right != null && direction == "right")
-        {
-            nextNode = currentNode.right;
-            previousDirection = "right";
-        }
-        else
-        {
-            Debug.Log("Sem direção na direção solicitada, mantendo a direção anterior.");
-
-            // Se a direção atual não for válida, continua na direção anterior
-            if (previousDirection == "up" && currentNode.up != null)
+            // Tenta definir o próximo nó com base na direção atual
+            if (directions.TryGetValue(direction, out MyNode nextNode) && nextNode != null)
             {
-                nextNode = currentNode.up;
+                currentNode = nextNode;
+                previousDirection = direction;
             }
-            else if (previousDirection == "down" && currentNode.down != null)
+            else
             {
-                nextNode = currentNode.down;
-            }
-            else if (previousDirection == "left" && currentNode.left != null)
-            {
-                nextNode = currentNode.left;
-            }
-            else if (previousDirection == "right" && currentNode.right != null)
-            {
-                nextNode = currentNode.right;
+
+                // Continua na direção anterior, se válida
+                if (directions.TryGetValue(previousDirection, out nextNode) && nextNode != null)
+                {
+                    currentNode = nextNode;
+                }
             }
         }
 
-        // Atualiza o nó atual, se houver um próximo nó válido
-        if (nextNode != null)
+        switch (previousDirection)
         {
-            currentNode = nextNode;
+            case "up":
+                transform.rotation = Quaternion.Euler(0, 0, 90);
+                break;
+            case "down":
+                transform.rotation = Quaternion.Euler(0, 0, -90);
+                break;
+            case "left":
+                transform.rotation = Quaternion.Euler(0, 0, 180);
+                break;
+            case "right":
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                break;
         }
-    }
 
     }
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -120,7 +107,6 @@ public class PacMan : Agent
     }
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        Debug.Log("Heuristic");
         var discreteActions = actionsOut.DiscreteActions;
 
         if (Input.GetKey(KeyCode.UpArrow))
