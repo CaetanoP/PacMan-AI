@@ -27,7 +27,7 @@ public class PacMan : Agent
         MoveToCurrentNode();
         // Atualiza o nó apenas quando o personagem está no nó
         if (IsNearNode())
-            UpdateCurrentNode();
+            AdvanceToNextNode();
         // Atualiza a rotação do personagem com base na direção
         UpdateRotation();
     }
@@ -57,7 +57,7 @@ public class PacMan : Agent
         return transform.position == currentNode.transform.position;
     }
 
-    private void UpdateCurrentNode()
+    private void AdvanceToNextNode()
     {
         // Tenta obter o próximo nó com base na direção atual
         MyNode nextNode = currentNode.GetNeighborByString(direction);

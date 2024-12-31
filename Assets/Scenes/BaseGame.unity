@@ -128315,7 +128315,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   currentNode: {fileID: 410641119}
-  pacMan: {fileID: 2079541063}
+  currentState: 2
+  pacman: {fileID: 2079541063}
 --- !u!58 &2095300621
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
-public class Blinky : Ghost
+public class Pinky : Ghost
 {
     public GameObject pacman;
     protected override void Chase()
@@ -29,8 +27,8 @@ public class Blinky : Ghost
                 direction = currentNode.GetDirectionByNode(nextNode);
                 currentNode = nextNode;
             }
+
+
         }
     }
 }
-
-
