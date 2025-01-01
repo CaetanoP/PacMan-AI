@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-public class Pinky : Ghost
+
+public class Blinky : Ghost
 {
     public GameObject pacman;
     protected override void Chase()
@@ -20,15 +22,15 @@ public class Pinky : Ghost
                 return;
             }
             //Seleciona o nó alvo
-            MyNode nextNode = SelectOptimalNeighbor(neighbors, pacman.GetComponent<PacMan>().currentNode);
+            MyNode nextNode = SelectOptimalNeighborByNode(neighbors, pacman.GetComponent<PacMan>().currentNode);
             // Atualiza a direção e o nó atual
             if (nextNode != null)
             {
                 direction = currentNode.GetDirectionByNode(nextNode);
                 currentNode = nextNode;
             }
-
-
         }
     }
 }
+
+

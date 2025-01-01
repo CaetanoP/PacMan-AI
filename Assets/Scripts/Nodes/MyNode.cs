@@ -53,9 +53,9 @@ public abstract class MyNode : MonoBehaviour
             }
         }
     }
-    public virtual float HeuristicCost(GameObject target)
+    public virtual float HeuristicCost(Vector2 targetPosition)
     {
-        return Vector2.Distance(transform.position, target.transform.position);
+        return Vector2.Distance(transform.position, targetPosition);
         //return Mathf.Abs(transform.position.x - target.transform.position.x) + Mathf.Abs(transform.position.y - target.transform.position.y);
     }
     public virtual MyNode GetNeighborByString(string direction)

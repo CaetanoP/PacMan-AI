@@ -126,7 +126,7 @@ public abstract class Ghost : MonoBehaviour
         MyNode[] neighbors = currentNode.GetComponent<DecisionNode>().neighbors;
 
         //Select the optimal neighbor based on the scatter node
-        currentNode = SelectOptimalNeighbor(neighbors, scatterNode);
+        currentNode = SelectOptimalNeighborByNode(neighbors, scatterNode);
 
     }
 
@@ -159,21 +159,44 @@ public abstract class Ghost : MonoBehaviour
     }
 
     /// <summary>
-    /// Seleciona o vizinho ótimo com base no nó alvo
+    /// Seleciona o vizinho ótimo com base no critério fornecido (nó alvo ou posição).
     /// </summary>
-    /// <param name="neighbors"></param>
-    /// <param name="targetNode"></param>
-    /// <returns></returns>
-    public virtual MyNode SelectOptimalNeighbor(MyNode[] neighbors, MyNode targetNode)
+    /// <param name="neighbors">Array de nós vizinhos.</param>
+    /// <param name="targetNodePosition">Posição do nó alvo.</param>
+    /// <param name="heuristicFunc">Função heurística para calcular o custo.</param>
+    /// <returns>O nó vizinho ótimo.</returns>
+    public virtual MyNode SelectOptimalNeighbor(MyNode[] neighbors, System.Func<MyNode, float> heuristicFunc)
     {
-        var optimalNeighbor = neighbors
-        .Where(x => x != null && x != currentNode.GetNeighborByString(direction.ReverseDirection()))
-        .GroupBy(x => x.HeuristicCost(targetNode.gameObject)) // Agrupa pelos custos heurísticos
-        .OrderBy(g => g.Key) // Ordena os grupos pelo custo heurístico
-        .FirstOrDefault() // Pega o grupo com menor custo heurístico
-        ?.OrderBy(x => priorityOrder.IndexOf(currentNode.GetDirectionByNode(x)))// Desempata pela prioridade dentro do grupo
-        .FirstOrDefault();// Pega o primeiro nó do grupo Baseado na prioridade
+        return neighbors
+            .Where(x => x != null && x != currentNode.GetNeighborByString(direction.ReverseDirection()))
+            .GroupBy(heuristicFunc) // Agrupa pelos custos heurísticos calculados
+            .OrderBy(g => g.Key) // Ordena os grupos pelo custo heurístico
+            .FirstOrDefault() // Pega o grupo com menor custo heurístico
+            ?.OrderBy(x => priorityOrder.IndexOf(currentNode.GetDirectionByNode(x))) // Desempata pela prioridade dentro do grupo
+            .FirstOrDefault(); // Pega o primeiro nó do grupo baseado na prioridade
+    }
 
-        return optimalNeighbor;
+    /// <summary>
+    /// Seleciona o vizinho ótimo com base no nó alvo.
+    /// </summary>
+    /// <param name="neighbors">Array de nós vizinhos.</param>
+    /// <param name="targetNode">Nó alvo.</param>
+    /// <returns>O nó vizinho ótimo.</returns>
+    public MyNode SelectOptimalNeighborByNode(MyNode[] neighbors, MyNode targetNode)
+    {
+        return SelectOptimalNeighbor(neighbors,
+            neighbor => neighbor.HeuristicCost(targetNode.gameObject.transform.position));
+    }
+
+    /// <summary>
+    /// Seleciona o vizinho ótimo com base na posição do nó alvo.
+    /// </summary>
+    /// <param name="neighbors">Array de nós vizinhos.</param>
+    /// <param name="targetNodePosition">Posição do nó alvo.</param>
+    /// <returns>O nó vizinho ótimo.</returns>
+    public MyNode SelectOptimalNeighborByDistance(MyNode[] neighbors, Vector3 targetNodePosition)
+    {
+        return SelectOptimalNeighbor(neighbors,
+            neighbor => neighbor.HeuristicCost(targetNodePosition));
     }
 }
