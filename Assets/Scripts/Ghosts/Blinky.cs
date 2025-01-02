@@ -11,7 +11,7 @@ public class Blinky : Ghost
     {
         //Take All the neighbors of the current node
         MyNode[] neighbors = currentNode.GetComponent<DecisionNode>().neighbors;
-        //Select the optimal neighbor based on the target node
+
         if (pacman != null)
         {
             Debug.Log("Pinky Chase");

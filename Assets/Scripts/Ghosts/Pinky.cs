@@ -13,7 +13,6 @@ public class Pinky : Ghost
         //Select the optimal neighbor based on the target node
         if (pacman != null)
         {
-            Debug.Log("Pinky Chase");
             //Verifica se o current node do pacman é nulo
             if (pacman.GetComponent<PacMan>().currentNode == null)
             {
@@ -22,49 +21,39 @@ public class Pinky : Ghost
             }
             switch (pacman.GetComponent<PacMan>().previousDirection)
             {
+
                 case "up":
-                    //Seleciona o nó alvo
-                    MyNode nextNode = SelectOptimalNeighborByDistance(neighbors, pacman.GetComponent<PacMan>().transform.position + (Vector3.up+Vector3.left)*4*tileSize);
-                    // Atualiza a direção e o nó atual
-                    if (nextNode != null)
-                    {
-                        direction = currentNode.GetDirectionByNode(nextNode);
-                        currentNode = nextNode;
-                    }
+                    MyNode nextNode = SelectOptimalNeighborByDistance(neighbors, pacman.GetComponent<PacMan>().transform.position + (Vector3.up + Vector3.left) * 4 * tileSize);
+                    UpdateCurrentNode(nextNode);
                     break;
-               case "down":
-                    //Seleciona o nó alvo
-                    nextNode = SelectOptimalNeighborByDistance(neighbors, pacman.GetComponent<PacMan>().transform.position + Vector3.down *4*tileSize);
-                    // Atualiza a direção e o nó atual
-                    if (nextNode != null)
-                    {
-                        direction = currentNode.GetDirectionByNode(nextNode);
-                        currentNode = nextNode;
-                    }
+
+                case "down":
+                    nextNode = SelectOptimalNeighborByDistance(neighbors, pacman.GetComponent<PacMan>().transform.position + Vector3.down * 4 * tileSize);
+                    UpdateCurrentNode(nextNode);
                     break;
+
                 case "left":
-                    //Seleciona o nó alvo
-                    nextNode = SelectOptimalNeighborByDistance(neighbors, pacman.GetComponent<PacMan>().transform.position + Vector3.left *4*tileSize);
-                    // Atualiza a direção e o nó atual
-                    if (nextNode != null)
-                    {
-                        direction = currentNode.GetDirectionByNode(nextNode);
-                        currentNode = nextNode;
-                    }
+                    nextNode = SelectOptimalNeighborByDistance(neighbors, pacman.GetComponent<PacMan>().transform.position + Vector3.left * 4 * tileSize);
+                    UpdateCurrentNode(nextNode);
                     break;
+
                 case "right":
-                    //Seleciona o nó alvo
-                    nextNode = SelectOptimalNeighborByDistance(neighbors, pacman.GetComponent<PacMan>().transform.position + Vector3.right *4*tileSize);
-                    // Atualiza a direção e o nó atual
-                    if (nextNode != null)
-                    {
-                        direction = currentNode.GetDirectionByNode(nextNode);
-                        currentNode = nextNode;
-                    }
+                    nextNode = SelectOptimalNeighborByDistance(neighbors, pacman.GetComponent<PacMan>().transform.position + Vector3.right * 4 * tileSize);
+                    UpdateCurrentNode(nextNode);
                     break;
             }
 
 
         }
+    }
+    /// <summary>
+    /// Update the current node and direction
+    /// </summary>
+    /// <param name="nextNode"></param>
+    public void UpdateCurrentNode(MyNode nextNode)
+    {
+        direction = currentNode.GetDirectionByNode(nextNode);
+        currentNode = nextNode;
+
     }
 }

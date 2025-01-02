@@ -10,7 +10,7 @@ public class PacMan : Agent
 {
     public string direction;
     public string previousDirection;
-    public float speed = 8f;
+    public float speed;
     public MyNode currentNode;
     public GameObject pacArrow;
 

@@ -18,11 +18,12 @@ public abstract class Ghost : MonoBehaviour
     protected List<string> priorityOrder = new List<string> { "up", "down", "left", "right" };
     public GhostState currentState;
     protected MyNode scatterNode;
+    [Header("Animation")]
+    public Animator animator;
 
     public virtual void Start()
     {
         //Can be overriden by child classes
-        speed = 5f;
         direction = "lef";
         currentState = GhostState.Chase;
     }
@@ -60,6 +61,41 @@ public abstract class Ghost : MonoBehaviour
                     Dead();
                 }
             }
+        }
+
+        UpdateAnimation();
+    }
+
+    private void UpdateAnimation()
+    {
+        //Change the bool parameter in the animator
+        //Reset the other bool parameters
+        switch (direction)
+        {
+            case "up":
+                animator.SetBool("is_Down", false);
+                animator.SetBool("is_Left", false);
+                animator.SetBool("is_Right", false);
+                animator.SetBool("is_Up", true);
+                break;
+            case "down":
+                animator.SetBool("is_Up", false);
+                animator.SetBool("is_Left", false);
+                animator.SetBool("is_Right", false);
+                animator.SetBool("is_Down", true);
+                break;
+            case "left":
+                animator.SetBool("is_Up", false);
+                animator.SetBool("is_Down", false);
+                animator.SetBool("is_Right", false);
+                animator.SetBool("is_Left", true);
+                break;
+            case "right":
+                animator.SetBool("is_Up", false);
+                animator.SetBool("is_Down", false);
+                animator.SetBool("is_Left", false);
+                animator.SetBool("is_Right", true);
+                break;
         }
     }
 
@@ -177,11 +213,11 @@ public abstract class Ghost : MonoBehaviour
     }
 
     /// <summary>
-    /// Seleciona o vizinho ótimo com base no nó alvo.
+    /// Select the optimal neighbor based on a target node object position.
     /// </summary>
-    /// <param name="neighbors">Array de nós vizinhos.</param>
-    /// <param name="targetNode">Nó alvo.</param>
-    /// <returns>O nó vizinho ótimo.</returns>
+    /// <param name="neighbors"></param>
+    /// <param name="targetNode"></param>
+    /// <returns>Optimal Choice</returns>
     public MyNode SelectOptimalNeighborByNode(MyNode[] neighbors, MyNode targetNode)
     {
         return SelectOptimalNeighbor(neighbors,
@@ -189,11 +225,11 @@ public abstract class Ghost : MonoBehaviour
     }
 
     /// <summary>
-    /// Seleciona o vizinho ótimo com base na posição do nó alvo.
+    /// Select the optimal neighbor based on a global world position.
     /// </summary>
-    /// <param name="neighbors">Array de nós vizinhos.</param>
-    /// <param name="targetNodePosition">Posição do nó alvo.</param>
-    /// <returns>O nó vizinho ótimo.</returns>
+    /// <param name="neighbors"></param>
+    /// <param name="targetNodePosition"></param>
+    /// <returns>Optimal Choice</returns>
     public MyNode SelectOptimalNeighborByDistance(MyNode[] neighbors, Vector3 targetNodePosition)
     {
         return SelectOptimalNeighbor(neighbors,
