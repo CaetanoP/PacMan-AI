@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2391834651398361920}
   - component: {fileID: 2305016487060121908}
   - component: {fileID: -4715900200745354837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PacMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ MonoBehaviour:
   MaxStep: 1000
   direction: 
   previousDirection: 
-  speed: 8
+  speed: 4
   currentNode: {fileID: 0}
   pacArrow: {fileID: 0}
 --- !u!114 &-4715900200745354837

@@ -8,6 +8,8 @@ public abstract class Ghost : MonoBehaviour
     public float speed;
     protected string direction;
     public MyNode currentNode;
+    public GameObject pacman;
+    public float tileSize = 0.5f;
     public enum GhostState
     {
         Chase,
@@ -17,7 +19,7 @@ public abstract class Ghost : MonoBehaviour
     }
     protected List<string> priorityOrder = new List<string> { "up", "down", "left", "right" };
     public GhostState currentState;
-    protected MyNode scatterNode;
+    [SerializeField] protected MyNode scatterNode;
     [Header("Animation")]
     public Animator animator;
 
@@ -158,14 +160,22 @@ public abstract class Ghost : MonoBehaviour
     }
     protected virtual void Scatter()
     {
-        //Take All the neighbors of the current node
-        MyNode[] neighbors = currentNode.GetComponent<DecisionNode>().neighbors;
+        //Update the direction and the current node
 
-        //Select the optimal neighbor based on the scatter node
-        currentNode = SelectOptimalNeighborByNode(neighbors, scatterNode);
+
+
 
     }
+    /// <summary>
+    /// Update the current node and direction
+    /// </summary>
+    /// <param name="nextNode"></param>
+    public void UpdateCurrentNode(MyNode nextNode)
+    {
+        direction = currentNode.GetDirectionByNode(nextNode);
+        currentNode = nextNode;
 
+    }
     protected virtual void Chase()
     {
 

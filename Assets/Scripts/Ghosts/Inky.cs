@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Inky : Ghost
 {
-    public GameObject pacman;
     public GameObject blinky;
-    public float tileSize = 0.5f;
     protected override void Chase()
     {
         //Take All the neighbors of the current node
@@ -66,15 +64,14 @@ public class Inky : Ghost
         targetPosition += blinkyToTarget * 2;
         return targetPosition;
     }
-    /// <summary>
-    /// Update the current node and direction
-    /// </summary>
-    /// <param name="nextNode"></param>
-    public void UpdateCurrentNode(MyNode nextNode)
+    protected override void Scatter()
     {
-        direction = currentNode.GetDirectionByNode(nextNode);
-        currentNode = nextNode;
+        //Take All the neighbors of the current node
+        MyNode[] neighbors = currentNode.GetComponent<DecisionNode>().neighbors;
 
+        Vector3 customTarget = scatterNode.transform.position + new Vector3(0, -2 * tileSize, 0);
+        MyNode nextNode = SelectOptimalNeighborByDistance(neighbors, customTarget);
+        UpdateCurrentNode(nextNode);
     }
 }
 

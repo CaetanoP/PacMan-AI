@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Blinky : Ghost
+public sealed class Blinky : Ghost
 {
-    public GameObject pacman;
     protected override void Chase()
     {
         //Take All the neighbors of the current node
@@ -26,10 +25,18 @@ public class Blinky : Ghost
             // Atualiza a direção e o nó atual
             if (nextNode != null)
             {
-                direction = currentNode.GetDirectionByNode(nextNode);
-                currentNode = nextNode;
+                UpdateCurrentNode(nextNode);
             }
         }
+    }
+    protected override void Scatter()
+    {
+        //Take All the neighbors of the current node
+        MyNode[] neighbors = currentNode.GetComponent<DecisionNode>().neighbors;
+        //Select the custom target for the scatter mode
+        Vector3 customTarget = scatterNode.transform.position + new Vector3(0, 4 * tileSize, 0);
+        MyNode nextNode = SelectOptimalNeighborByDistance(neighbors, customTarget);
+        UpdateCurrentNode(nextNode);
     }
 }
 

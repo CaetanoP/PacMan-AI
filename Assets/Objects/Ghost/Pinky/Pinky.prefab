@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -570211787
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1131001134, guid: 7b534cad5ff52dd4aa3f3ad2ecda80b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -155,9 +155,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f3cf87b0ccf9a47831d5a359fb6508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 4
   currentNode: {fileID: 0}
-  currentState: 0
-  animator: {fileID: 2192520625611001188}
   pacman: {fileID: 0}
   tileSize: 0.5
+  currentState: 1
+  scatterNode: {fileID: 0}
+  animator: {fileID: 2192520625611001188}
